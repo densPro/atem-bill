@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { clearBill } from './BillFormatConverter.functions';
 import { billNumberKey, nitProviderKey, cufKey, issueDateKey, totalKey, controlCodeKey } from '../Bill.constants';
 import { useLocalStorage } from '../../Hooks/useLocalStorage';
-import { useAppDispatch } from '../../App/store';
+import { useDispatch } from 'react-redux';
 import { Bill, addBill } from '../../Features/bills/billSlice';
 
 export const BillFormatConverterComponent = () => {
@@ -18,7 +18,7 @@ export const BillFormatConverterComponent = () => {
   const [total, setTotal] = useLocalStorage(totalKey, '');
   const [controlCode, setControlCode] = useLocalStorage(controlCodeKey, '');
 
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
 
   const insertBill = () => {
     const bill: Bill = {

@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { clearBill } from './BillFormatConverter/BillFormatConverter.functions';
-import { useAppDispatch } from '../App/store';
+import { useDispatch } from 'react-redux';
 import { BillFormatConverter } from './BillFormatConverter/BillFormatConverter';
 import { useLocalStorage } from '../Hooks/useLocalStorage';
 import { nitProviderKey, billNumberKey, cufKey, issueDateKey, totalKey, controlCodeKey, billTextKey } from './Bill.constants';
@@ -13,7 +13,7 @@ import { Bill, addBill } from '../Features/bills/billSlice';
 
 export const SimpleBillFormatConverter = () => {
   const { t } = useTranslation();
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
   const [billTextValue, setBillTextValue] = useLocalStorage(billTextKey, '');
   const [nitProvider, setNitProvider] = useLocalStorage(nitProviderKey, '');
   const [billNumber, setBillNumber] = useLocalStorage(billNumberKey, '');

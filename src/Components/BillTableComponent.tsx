@@ -4,12 +4,13 @@ import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import { useTranslation } from 'react-i18next';
-import { useAppSelector } from '../App/store';
+import { useSelector } from 'react-redux';
+import { selectBills } from '../Features/bills/billSlice'
 
 export const BillTableComponent = () => {
   const { t } = useTranslation();
 
-  const bills = useAppSelector(state => state.bill.bills);
+  const bills = useSelector(selectBills);
 
   const defaultColDef = { wrapText: true };
   const columnWidth = 235;
@@ -26,7 +27,7 @@ export const BillTableComponent = () => {
   return (
     <div className='ag-theme-alpine-dark' style={{ height: 400, width: "100%", margin: 8 }}>
       <AgGridReact
-        rowData={bills}
+        rowData={bills.bills}
         defaultColDef={defaultColDef}
         columnDefs={columnDefs}>
       </AgGridReact>
