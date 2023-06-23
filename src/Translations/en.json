@@ -1,0 +1,22 @@
+{
+  "bill": {
+    "id": "Nº",
+    "nitProvider": "NIT Provider",
+    "billNumber": "Nº Bill",
+    "cuf": "N° Authorization / CUF",
+    "issueDate": "issue Date DD/MM/AAAA",
+    "total": "Total",
+    "tabs": {
+      "table": "Table",
+      "toCopy": "To Copy",
+      "simple": "One bill at once",
+      "complex": "Bill by parts"
+    },
+    "controlCode": "Control Code",
+    "title": "bill",
+    "buttons": {
+      "insert": "Insert",
+      "clear": "Clear"
+    }
+  }
+}

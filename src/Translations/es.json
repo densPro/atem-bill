@@ -1,0 +1,22 @@
+{
+  "bill": {
+    "id": "Nº",
+    "nitProvider": "NIT Proveedor",
+    "billNumber": "Nº Factura",
+    "cuf": "N° Autorización / CUF",
+    "issueDate": "Fecha Emisión DD/MM/AAAA",
+    "total": "Importe Total",
+    "tabs": {
+      "table": "Table",
+      "toCopy": "To Copy",
+      "simple": "One bill at once",
+      "complex": "Bill by parts"
+    },
+    "controlCode": "'Código Control",
+    "title": "Factura",
+    "buttons": {
+      "insert": "Insertar",
+      "clear": "Limpiar"
+    } 
+  }
+}
