@@ -1,8 +1,18 @@
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { emptyBill, selectBills } from '../Features/bills/billSlice';
+import Button from '@mui/material/Button';
+import { useTranslation } from 'react-i18next';
 
 export const BillToCopyComponent = () => {
+  const { t } = useTranslation();
+  const dispatch = useDispatch()
+  const clearBillTable = () => {
+    dispatch(emptyBill())
+  };
+  const bills = useSelector(selectBills);
   return (
     <Box
       component='form'
@@ -12,8 +22,14 @@ export const BillToCopyComponent = () => {
       noValidate
       autoComplete="off"
     >
+      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <Button style={{ marginLeft: 10 }}
+          onClick={() => clearBillTable()}
+          variant='outlined'>{t('bill.buttons.clear')}
+        </Button>
+      </div>
       <div>
-        <TextField multiline rows={16} />
+        <TextField multiline rows={16} value={bills.flatBills} />
       </div>
     </Box>
   )

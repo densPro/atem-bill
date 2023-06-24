@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 export interface Bill {
-  id?: number ;
+  id?: number;
   nitProvider: number;
   billNumber: number;
   cuf: string;
@@ -12,12 +12,12 @@ export interface Bill {
 
 interface BillState {
   bills: Bill[];
+  flatBills: string;
 }
 
 export const initialState: BillState = {
-  bills:  [
-    { id: 1, nitProvider: 12, billNumber: 35000, cuf: '123', issueDate: '2023-05-05', total: 1, controlCode: 'sdf' },
-  ]
+  bills: [],
+  flatBills: '',
 };
 
 export const billSlice = createSlice({
@@ -25,7 +25,7 @@ export const billSlice = createSlice({
   initialState,
   reducers: {
     addBill: (state, action: PayloadAction<{ bill: Bill }>) => {
-      state.bills.push({
+      const billToAdd: Bill = {
         id: state.bills.length + 1,
         nitProvider: action.payload.bill.nitProvider,
         billNumber: action.payload.bill.billNumber,
@@ -33,11 +33,25 @@ export const billSlice = createSlice({
         issueDate: action.payload.bill.issueDate,
         total: action.payload.bill.total,
         controlCode: action.payload.bill.controlCode,
-      });
+      };
+      state.bills.push(billToAdd);
+    },
+    emptyBill: (state, action: PayloadAction<void>) => {
+      state.bills = initialState.bills;
+      state.flatBills = initialState.flatBills;
+    },
+    addFlatBill: (state, action: PayloadAction<string>) => {
+      state.flatBills += `${state.bills.length + 1}	${action.payload}\n`;
     },
   },
 });
 
 export default billSlice.reducer;
-export const selectBills = (state: any) => {console.log(state); return state.billState};
-export const { addBill } = billSlice.actions;
+export const selectBills = (state: any) => {
+  return state.billState;
+};
+export const {
+  addBill,
+  emptyBill,
+  addFlatBill
+} = billSlice.actions;

@@ -4,12 +4,13 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { clearBill } from './BillFormatConverter/BillFormatConverter.functions';
+import { clearBill } from './BillByParts/BillByParts.functions';
 import { useDispatch } from 'react-redux';
 import { BillFormatConverter } from './BillFormatConverter/BillFormatConverter';
 import { useLocalStorage } from '../Hooks/useLocalStorage';
 import { nitProviderKey, billNumberKey, cufKey, issueDateKey, totalKey, controlCodeKey, billTextKey } from './Bill.constants';
-import { Bill, addBill } from '../Features/bills/billSlice';
+import { Bill, addBill, addFlatBill } from '../Features/bills/billSlice';
+import * as _ from 'lodash';
 
 export const SimpleBillFormatConverter = () => {
   const { t } = useTranslation();
@@ -23,7 +24,9 @@ export const SimpleBillFormatConverter = () => {
   const [controlCode, setControlCode] = useLocalStorage(controlCodeKey, '');
   const converter = new BillFormatConverter();
   const insertBill = () => {
-    converter.convert(billTextValue);
+    if (_.isNull(billTextValue) || _.isEmpty(billTextValue)) return;
+    const flatBill = converter.convert(billTextValue);
+    dispatch(addFlatBill(flatBill));
     setNitProvider(converter.parts[0] ?? '');
     setBillNumber(converter.parts[1] ?? '');
     setCUF(converter.parts[2] ?? '');
@@ -40,7 +43,7 @@ export const SimpleBillFormatConverter = () => {
       total: +total,
       controlCode: controlCode
     };
-    dispatch(addBill({ bill: bill}));
+    dispatch(addBill({ bill: bill }));
     clearBill([setBillTextValue]);
   };
 

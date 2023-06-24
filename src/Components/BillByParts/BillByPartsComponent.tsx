@@ -3,13 +3,13 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useTranslation } from 'react-i18next';
-import { clearBill } from './BillFormatConverter.functions';
+import { clearBill } from './BillByParts.functions';
 import { billNumberKey, nitProviderKey, cufKey, issueDateKey, totalKey, controlCodeKey } from '../Bill.constants';
 import { useLocalStorage } from '../../Hooks/useLocalStorage';
 import { useDispatch } from 'react-redux';
 import { Bill, addBill } from '../../Features/bills/billSlice';
 
-export const BillFormatConverterComponent = () => {
+export const BillByPartsComponent = () => {
 
   const [nitProvider, setNitProvider] = useLocalStorage(nitProviderKey, '');
   const [billNumber, setBillNumber] = useLocalStorage(billNumberKey, '');
@@ -43,7 +43,7 @@ export const BillFormatConverterComponent = () => {
       noValidate
       autoComplete="off"
     >
-      <div>       
+      <div>
         <TextField
           label={t('bill.nitProvider')}
           type='number'
@@ -67,7 +67,7 @@ export const BillFormatConverterComponent = () => {
           data-date-format='MM DD YYYY'
           InputLabelProps={{ shrink: true }}
           value={issueDate}
-          onChange={e => {setIssueDate(e.target.value); console.log(e.target.value)}}
+          onChange={e => { setIssueDate(e.target.value); console.log(e.target.value) }}
         />
         <TextField
           label={t('bill.total')}

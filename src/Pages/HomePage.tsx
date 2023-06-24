@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import { BillFormatConverterComponent } from "../Components/BillFormatConverter/BillFormatConverterComponent"
+import { BillByPartsComponent } from "../Components/BillByParts/BillByPartsComponent"
 import { BillTableComponent } from "../Components/BillTableComponent"
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
@@ -11,11 +11,6 @@ import { SimpleBillFormatConverter } from "../Components/SimpleBillFormatConvert
 import { BillToCopyComponent } from "../Components/BillToCopyComponent";
 
 export const HomePage = () => {
-  const homePageStyle = {
-    alignItems: "center",
-    height: "100%",
-    margin: "50px"
-  };
   const [FormTab, setFormTab] = useState('1');
   const [tableTab, setTableTab] = useState('1');
 
@@ -42,7 +37,7 @@ export const HomePage = () => {
           <SimpleBillFormatConverter />
         </TabPanel>
         <TabPanel value='2'>
-          <BillFormatConverterComponent />
+          <BillByPartsComponent />
         </TabPanel>
       </TabContext>
       <TabContext value={tableTab}>

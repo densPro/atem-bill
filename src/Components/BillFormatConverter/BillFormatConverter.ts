@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Bill } from '../../Features/bills/billSlice';
 
 export class BillFormatConverter {
   billNumber: string | undefined;
