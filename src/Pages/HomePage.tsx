@@ -9,6 +9,7 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { SimpleBillFormatConverter } from "../Components/SimpleBillFormatConverter";
 import { BillToCopyComponent } from "../Components/BillToCopyComponent";
+import { QRScannerComponent } from "../Components/QRScannerComponent";
 
 export const HomePage = () => {
   const [FormTab, setFormTab] = useState('1');
@@ -26,6 +27,7 @@ export const HomePage = () => {
     <Box
       margin="50px"
     >
+      <QRScannerComponent />
       <TabContext value={FormTab}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <TabList onChange={handleFormTabChange} aria-label="lab API tabs example">
