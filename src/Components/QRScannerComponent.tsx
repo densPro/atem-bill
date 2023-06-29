@@ -34,7 +34,7 @@ export const QRScannerComponent = () => {
               setError(null);
             }
           }}
-          style={{ width: "500px" }}
+          style={{ width: "300px" }}
         />
       }
     </div>

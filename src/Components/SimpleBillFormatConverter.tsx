@@ -59,7 +59,7 @@ export const SimpleBillFormatConverter = () => {
     <Box
       component='form'
       sx={{
-        '& .MuiTextField-root': { m: 1, width: '100ch' },
+        '& .MuiTextField-root': { m: 1, width: '100%' },
       }}
       noValidate
       autoComplete="off"
