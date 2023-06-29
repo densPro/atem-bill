@@ -5,17 +5,17 @@ import TextField from '@mui/material/TextField';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { clearBill } from './BillByParts/BillByParts.functions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { BillFormatConverter } from './BillFormatConverter/BillFormatConverter';
 import { useLocalStorage } from '../Hooks/useLocalStorage';
-import { nitProviderKey, billNumberKey, cufKey, issueDateKey, totalKey, controlCodeKey, billTextKey } from './Bill.constants';
-import { Bill, addBill, addFlatBill } from '../Features/bills/billSlice';
+import { nitProviderKey, billNumberKey, cufKey, issueDateKey, totalKey, controlCodeKey } from './Bill.constants';
+import { Bill, addBill, addFlatBill, selectBillState, setBillTextInput } from '../Features/bills/billSlice';
 import * as _ from 'lodash';
 
 export const SimpleBillFormatConverter = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const [billTextValue, setBillTextValue] = useLocalStorage(billTextKey, '');
+  const billState = useSelector(selectBillState);
   const [nitProvider, setNitProvider] = useLocalStorage(nitProviderKey, '');
   const [billNumber, setBillNumber] = useLocalStorage(billNumberKey, '');
   const [cuf, setCUF] = useLocalStorage(cufKey, '');
@@ -23,9 +23,12 @@ export const SimpleBillFormatConverter = () => {
   const [total, setTotal] = useLocalStorage(totalKey, '');
   const [controlCode, setControlCode] = useLocalStorage(controlCodeKey, '');
   const converter = new BillFormatConverter();
+  const setBillTextInputHandler = (value: string) => {
+    dispatch(setBillTextInput(value));
+  };
   const insertBill = () => {
-    if (_.isNull(billTextValue) || _.isEmpty(billTextValue)) return;
-    const flatBill = converter.convert(billTextValue);
+    if (_.isNull(billState.billTextInput) || _.isEmpty(billState.billTextInput)) return;
+    const flatBill = converter.convert(billState.billTextInput);
     dispatch(addFlatBill(flatBill));
     setNitProvider(converter.parts[0] ?? '');
     setBillNumber(converter.parts[1] ?? '');
@@ -44,7 +47,7 @@ export const SimpleBillFormatConverter = () => {
       controlCode: controlCode
     };
     dispatch(addBill({ bill: bill }));
-    clearBill([setBillTextValue]);
+    setBillTextInputHandler('');
   };
 
   const createStringDate = (date: string): string => {
@@ -64,8 +67,8 @@ export const SimpleBillFormatConverter = () => {
       <div>
         <TextField
           label={t('bill.title')}
-          value={billTextValue}
-          onChange={e => setBillTextValue(e.target.value)}
+          value={billState.billTextInput}
+          onChange={e => setBillTextInputHandler(e.target.value)}
         />
       </div>
       <Button style={{ marginLeft: 10 }}
@@ -73,7 +76,7 @@ export const SimpleBillFormatConverter = () => {
         variant='outlined'>{t('bill.buttons.insert')}
       </Button>
       <Button style={{ marginLeft: 10 }}
-        onClick={() => clearBill([setBillTextValue])}
+        onClick={() => setBillTextInputHandler('')}
         variant='outlined'>{t('bill.buttons.clear')}
       </Button>
     </Box>

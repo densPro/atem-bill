@@ -2,7 +2,7 @@ import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { emptyBill, selectBills } from '../Features/bills/billSlice';
+import { emptyBill, selectBillState } from '../Features/bills/billSlice';
 import Button from '@mui/material/Button';
 import { useTranslation } from 'react-i18next';
 
@@ -12,7 +12,7 @@ export const BillToCopyComponent = () => {
   const clearBillTable = () => {
     dispatch(emptyBill())
   };
-  const bills = useSelector(selectBills);
+  const billState = useSelector(selectBillState);
   return (
     <Box
       component='form'
@@ -29,7 +29,7 @@ export const BillToCopyComponent = () => {
         </Button>
       </div>
       <div>
-        <TextField multiline rows={16} value={bills.flatBills} />
+        <TextField multiline rows={16} value={billState.flatBills} />
       </div>
     </Box>
   )

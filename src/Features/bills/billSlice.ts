@@ -13,11 +13,13 @@ export interface Bill {
 interface BillState {
   bills: Bill[];
   flatBills: string;
+  billTextInput: string;
 }
 
 export const initialState: BillState = {
   bills: [],
   flatBills: '',
+  billTextInput: 'sdf',
 };
 
 export const billSlice = createSlice({
@@ -43,15 +45,20 @@ export const billSlice = createSlice({
     addFlatBill: (state, action: PayloadAction<string>) => {
       state.flatBills += `${state.bills.length + 1}	${action.payload}\n`;
     },
+    setBillTextInput: (state, action: PayloadAction<string>) => {
+      state.billTextInput = action.payload;
+    },
   },
 });
 
 export default billSlice.reducer;
-export const selectBills = (state: any) => {
+export const selectBillState = (state: any) => {
   return state.billState;
 };
+
 export const {
   addBill,
   emptyBill,
-  addFlatBill
+  addFlatBill,
+  setBillTextInput,
 } = billSlice.actions;
