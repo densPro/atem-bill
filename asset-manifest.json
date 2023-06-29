@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/atem-bill/static/css/main.6bba183b.css",
-    "main.js": "/atem-bill/static/js/main.3fa9bfb8.js",
+    "main.js": "/atem-bill/static/js/main.dc78e8fd.js",
     "static/js/787.65dc3a20.chunk.js": "/atem-bill/static/js/787.65dc3a20.chunk.js",
     "index.html": "/atem-bill/index.html",
     "main.6bba183b.css.map": "/atem-bill/static/css/main.6bba183b.css.map",
-    "main.3fa9bfb8.js.map": "/atem-bill/static/js/main.3fa9bfb8.js.map",
+    "main.dc78e8fd.js.map": "/atem-bill/static/js/main.dc78e8fd.js.map",
     "787.65dc3a20.chunk.js.map": "/atem-bill/static/js/787.65dc3a20.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.6bba183b.css",
-    "static/js/main.3fa9bfb8.js"
+    "static/js/main.dc78e8fd.js"
   ]
 }
