@@ -10,7 +10,7 @@ export class BillFormatConverter {
   total: string | undefined;
   controlCode: string | undefined;
   parts: string[];
-  
+
   constructor() {
     this.parts = [''];
   }
@@ -19,10 +19,29 @@ export class BillFormatConverter {
     const billsWithoutSpaces = bills.replaceAll(' ', '');
     const partsSplit = billsWithoutSpaces.split('|');
     // remove double value
-    this.parts = partsSplit
-      .slice(0, 4)
-      .concat(partsSplit.slice(5, 7));
+    this.parts = partsSplit.slice(0, 4).concat(partsSplit.slice(5, 7));
+    // remove extra Zeros from the bill number (parts[1])
+    this.parts[1] = this.removeLeadingZeros(this.parts[1]);
     const result = this.parts.join('|');
     return result.replaceAll('|', '	');
+  }
+
+  removeLeadingZeros(input: string): string {
+    let nonZeroFound = false;
+    let result = '';
+
+    for (let i = 0; i < input.length; i++) {
+      const char = input[i];
+
+      if (!nonZeroFound && char !== '0') {
+        nonZeroFound = true;
+      }
+
+      if (nonZeroFound) {
+        result += char;
+      }
+    }
+
+    return result;
   }
 }
