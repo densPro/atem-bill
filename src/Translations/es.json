@@ -7,12 +7,12 @@
     "issueDate": "Fecha Emisión DD/MM/AAAA",
     "total": "Importe Total",
     "tabs": {
-      "table": "Table",
-      "toCopy": "To Copy",
-      "simple": "One bill at once",
-      "complex": "Bill by parts"
+      "table": "Tabla",
+      "toCopy": "Para Copiar",
+      "simple": "Factura completa",
+      "complex": "Factura por partes"
     },
-    "controlCode": "'Código Control",
+    "controlCode": "Código Control",
     "title": "Factura",
     "buttons": {
       "insert": "Insertar",
